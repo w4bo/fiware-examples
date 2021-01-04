@@ -1,6 +1,7 @@
 00-install/tutorials.Getting-Started
 01-contextprovider/tutorials.Context-Providers
 02-iotsensor/tutorials.IoT-Sensors
+03-mqtt/tutorials.IoT-over-MQTT
 
 # Created by https://www.gitignore.io/api/java,scala,linux,macos,python,gradle,kotlin,windows,eclipse,intellij,virtualenv,jupyternotebooks
 # Edit at https://www.gitignore.io/?templates=java,scala,linux,macos,python,gradle,kotlin,windows,eclipse,intellij,virtualenv,jupyternotebooks
