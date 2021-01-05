@@ -1,0 +1,4 @@
+ip: "localhost"
+portcontextbroker: 1026
+portnorth: 4041
+porthttp: 7896
