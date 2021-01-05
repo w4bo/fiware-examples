@@ -20,4 +20,5 @@ class Config {
     var portcontextbroker: Any? = null
     var portnorth: Any? = null
     var porthttp: Any? = null
+    var portdummydevice: Any? = null
 }

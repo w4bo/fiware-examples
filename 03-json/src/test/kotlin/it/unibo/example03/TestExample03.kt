@@ -12,6 +12,7 @@ val IP = config.ip
 val PORT_CONTEXTBROKER = config.portcontextbroker
 val PORT_NORTH = config.portnorth
 val PORT_HTTP = config.porthttp
+val PORT_DUMMYDEVICE = config.portdummydevice
 
 class TestExample03 {
     fun handleRes(res: Response) {
@@ -81,7 +82,6 @@ class TestExample03 {
                                 "device_id":   "motion001",
                                 "entity_name": "urn:ngsi-ld:Motion:001",
                                 "entity_type": "Motion",
-                                "timezone":    "Europe/Berlin",
                                 "attributes": [ { "object_id": "c", "name": "count", "type": "Integer" } ],
                                 "static_attributes": [{ "name":"refStore", "type": "Relationship", "value": "urn:ngsi-ld:Store:001"}]
                             }
@@ -122,7 +122,7 @@ class TestExample03 {
                                 "entity_name": "urn:ngsi-ld:Bell:001",
                                 "entity_type": "Bell",
                                 "transport": "HTTP",
-                                "endpoint": "http://iot-sensors:3001/iot/bell001",
+                                "endpoint": "http://iot-sensors:${PORT_DUMMYDEVICE}/iot/bell001",
                                 "commands": [{ "name": "ring", "type": "command" }],
                                 "static_attributes": [{"name":"refStore", "type": "Relationship", "value": "urn:ngsi-ld:Store:001"}]
                             }
