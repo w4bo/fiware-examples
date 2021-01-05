@@ -5,7 +5,6 @@ import org.json.JSONObject
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Assertions.fail
 import org.junit.jupiter.api.Test
-import java.util.*
 
 val config = Config.init()
 val IP = config.ip
@@ -15,6 +14,10 @@ val PORT_HTTP = config.porthttp
 val PORT_DUMMYDEVICE = config.portdummydevice
 
 class TestExample03 {
+    /**
+     * Check weather the response is successful.
+     * @param res response
+     */
     fun handleRes(res: Response) {
         assertTrue(res.statusCode.toString().startsWith("2"), res.statusCode.toString() + " " + res.text)
         println(res.text)
@@ -59,7 +62,7 @@ class TestExample03 {
                     ),
                     data = data.toString()
             )
-            // handleRes(res)
+            handleRes(res)
 
             /* In the example the IoT Agent is informed that the /iot/json endpoint will be used and that devices will
              * authenticate themselves by including the token $group. For a JSON IoT Agent this means
@@ -82,15 +85,16 @@ class TestExample03 {
                                 "device_id":   "motion001",
                                 "entity_name": "urn:ngsi-ld:Motion:001",
                                 "entity_type": "Motion",
+                                "transport": "HTTP",
                                 "attributes": [ { "object_id": "c", "name": "count", "type": "Integer" } ],
-                                "static_attributes": [{ "name":"refStore", "type": "Relationship", "value": "urn:ngsi-ld:Store:001"}]
+                                "static_attributes": [{ "name": "refStore", "type": "Relationship", "value": "urn:ngsi-ld:Store:001"}]
                             }
                         ]
                     }""".trimIndent()
             )
             handleRes(res)
 
-            /* Simulate a dummy IoT device measurement coming from the Motion Sensor device motion001, by making the following request */
+            /* Simulate a dummy IoT device measurement by making the following request */
             res = khttp.post(
                     url = "http://$IP:${PORT_HTTP}/iot/json?k=$group&i=motion001",
                     headers = mapOf("Content-Type" to "application/json"),
@@ -106,7 +110,9 @@ class TestExample03 {
             )
             handleRes(res)
 
-            /* Provisioning an actuator is similar to provisioning a sensor. This time an endpoint attribute holds the location where the IoT Agent needs to send the JSON command and the commands array includes a list of each command that can be invoked. */
+            /* Provisioning an actuator is similar to provisioning a sensor. This time an endpoint attribute holds the
+             * location where the IoT Agent needs to send the JSON command and the commands array includes a list of
+             * each command that can be invoked. */
             res = khttp.post(
                     url = "http://$IP:${PORT_NORTH}/iot/devices",
                     headers = mapOf(
@@ -124,7 +130,7 @@ class TestExample03 {
                                 "transport": "HTTP",
                                 "endpoint": "http://iot-sensors:${PORT_DUMMYDEVICE}/iot/bell001",
                                 "commands": [{ "name": "ring", "type": "command" }],
-                                "static_attributes": [{"name":"refStore", "type": "Relationship", "value": "urn:ngsi-ld:Store:001"}]
+                                "static_attributes": [{"name": "refStore", "type": "Relationship", "value": "urn:ngsi-ld:Store:001"}]
                             }
                         ]
                     }""".trimIndent()
@@ -184,8 +190,8 @@ class TestExample03 {
             handleRes(res)
 
             res = khttp.get(
-                url = "http://$IP:${PORT_CONTEXTBROKER}/v2/entities/urn:ngsi-ld:Bell:001?type=Bell&options=keyValues",
-                headers = mapOf("fiware-service" to "openiot", "fiware-servicepath" to "/")
+                    url = "http://$IP:${PORT_CONTEXTBROKER}/v2/entities/urn:ngsi-ld:Bell:001?type=Bell&options=keyValues",
+                    headers = mapOf("fiware-service" to "openiot", "fiware-servicepath" to "/")
             )
             handleRes(res)
         } catch (e: Exception) {

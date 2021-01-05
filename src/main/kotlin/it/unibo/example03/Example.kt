@@ -1,6 +1,7 @@
 package it.unibo.example03
 
 interface IThing {
+    val id: String
     fun register(): Unit
     fun unregister(): Unit
 }

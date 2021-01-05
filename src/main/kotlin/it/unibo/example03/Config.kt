@@ -21,4 +21,5 @@ class Config {
     var portnorth: Any? = null
     var porthttp: Any? = null
     var portdummydevice: Any? = null
+    var portmosquito: Any? = null
 }
