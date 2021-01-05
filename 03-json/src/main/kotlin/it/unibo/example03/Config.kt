@@ -1,6 +1,7 @@
 package it.unibo.example03
 
 import org.yaml.snakeyaml.Yaml
+import org.yaml.snakeyaml.constructor.Constructor
 
 
 class Config {
@@ -11,7 +12,7 @@ class Config {
 
         fun init(): Config {
             val inputStream = this.javaClass.classLoader.getResourceAsStream("config.yml")
-            return Yaml().load(inputStream)
+            return Yaml(Constructor(Config::class.java)).load(inputStream)
         }
     }
 
@@ -19,4 +20,5 @@ class Config {
     var portcontextbroker: Any? = null
     var portnorth: Any? = null
     var porthttp: Any? = null
+    var portdummydevice: Any? = null
 }

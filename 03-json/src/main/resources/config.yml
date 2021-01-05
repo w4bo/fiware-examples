@@ -1,4 +1,5 @@
-ip: "localhost"
+ip: "137.204.72.85"
 portcontextbroker: 1026
 portnorth: 4041
 porthttp: 7896
+portdummydevice: 3001
