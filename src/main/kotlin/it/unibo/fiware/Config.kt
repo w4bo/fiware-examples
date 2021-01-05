@@ -1,4 +1,4 @@
-package it.unibo.example03
+package it.unibo.fiware
 
 import org.yaml.snakeyaml.Yaml
 import org.yaml.snakeyaml.constructor.Constructor
